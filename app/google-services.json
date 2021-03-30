@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "754222728734",
+    "project_id": "coin-news-8dac8",
+    "storage_bucket": "coin-news-8dac8.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:754222728734:android:c47e2cab11149b8db6100f",
+        "android_client_info": {
+          "package_name": "com.jjaln.dailychart"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "754222728734-5943bc74l92bgoj78v9kg62qgu9dffp9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBEfKa7Jv73e4UJdn36kmeatXNKP-jrdls"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "754222728734-5943bc74l92bgoj78v9kg62qgu9dffp9.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

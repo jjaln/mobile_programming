@@ -1,5 +1,6 @@
 package com.jjaln.dailychart.ui.dashboard;
 
+import android.app.ActionBar;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -54,7 +55,6 @@ public class DashboardFragment extends Fragment {
                 // Failed to read value
             }
         });
-
 
         // 버튼을 누르면 버튼의 텍스트가 value에 있는 첫번째 값으로 바뀜
         Button button = (Button)root.findViewById(R.id.button1);

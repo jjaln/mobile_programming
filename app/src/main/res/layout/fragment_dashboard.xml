@@ -24,14 +24,14 @@
         android:gravity="center_horizontal" />
 
     <Button
-        android:id="@+id/button1"
+        android:id="@+id/writeButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:text="Button"
+        android:layout_marginStart="268dp"
+        android:layout_marginLeft="268dp"
+        android:text="Write Post"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.005" />
+        app:layout_constraintVertical_bias="0.85" />
 </androidx.constraintlayout.widget.ConstraintLayout>

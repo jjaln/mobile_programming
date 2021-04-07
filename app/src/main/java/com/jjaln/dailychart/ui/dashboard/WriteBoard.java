@@ -30,6 +30,7 @@ public class WriteBoard extends AppCompatActivity {
         fab = findViewById(R.id.fabSubmitPost);
         fab.setOnClickListener((v -> { submitPost(); }));
     }
+
     private void submitPost() {
         ft = findViewById(R.id.fieldTitle);
         fb = findViewById(R.id.fieldBody);

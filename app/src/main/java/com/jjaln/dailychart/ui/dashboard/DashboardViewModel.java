@@ -4,8 +4,9 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-public class DashboardViewModel extends ViewModel {
+import com.jjaln.dailychart.ui.home.Coin_list_Adapter;
 
+public class DashboardViewModel extends ViewModel {
     private MutableLiveData<String> mText;
 
     public DashboardViewModel() {
@@ -16,4 +17,5 @@ public class DashboardViewModel extends ViewModel {
     public LiveData<String> getText() {
         return mText;
     }
+
 }

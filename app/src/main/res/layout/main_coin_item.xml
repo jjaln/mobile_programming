@@ -1,31 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
-    android:background="#FFD54F"
-    android:layout_width="150dp"
+    android:orientation="horizontal"
+    android:layout_width="65dp"
     android:layout_height="wrap_content"
-    android:layout_marginVertical="10dp"
+    android:layout_marginVertical="0dp"
     android:layout_marginHorizontal="10dp">
 
-    <androidx.cardview.widget.CardView
-        app:cardCornerRadius="100dp"
-        android:layout_gravity="center"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" >
 
-        <ImageView
-            android:id="@+id/coin_image"
-            android:background="#FFFFFFFF"
-            android:layout_width="100dp"
-            android:layout_height="100dp" />
-    </androidx.cardview.widget.CardView>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <ImageView
+                    android:id="@+id/coin_image"
+                    android:background="#FFFFFFFF"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_centerHorizontal="true"/>
 
-    <TextView android:layout_gravity="center"
-    android:id="@+id/coin_name"
-    android:layout_margin="10dp"
-    android:textSize="30sp"
-    android:layout_width="match_parent"
-    android:layout_height="30dp"/>
-
+                <TextView
+                    android:id="@+id/coin_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/coin_image"
+                    android:gravity="center"
+                    android:textColor="#000000"
+                    android:textSize="20sp" />
+            </RelativeLayout>
     </LinearLayout>

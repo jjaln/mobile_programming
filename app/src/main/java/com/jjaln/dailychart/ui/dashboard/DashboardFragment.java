@@ -3,6 +3,9 @@ package com.jjaln.dailychart.ui.dashboard;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -17,6 +20,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.jjaln.dailychart.MainActivity;
 import com.jjaln.dailychart.R;
 
 import java.util.ArrayList;
@@ -27,7 +31,7 @@ public class DashboardFragment extends Fragment {
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-
+        setHasOptionsMenu(true);
 
         View root = inflater.inflate(R.layout.fragment_dashboard, container, false);
 
@@ -40,7 +44,6 @@ public class DashboardFragment extends Fragment {
                 getActivity().startActivity(myIntent);
             }
         });
-
 //        // database 오브젝트화
 //        FirebaseDatabase database = FirebaseDatabase.getInstance();
 //
@@ -67,4 +70,27 @@ public class DashboardFragment extends Fragment {
 
         return root;
     }
+
+    @Override
+    public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+        inflater.inflate(R.menu.dashboard_actions,menu);
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        switch (item.getItemId()) {
+            case R.id.action_btn1:
+                Intent myIntent = new Intent(getActivity(), WriteBoard.class);
+                getActivity().startActivity(myIntent);
+                return true;
+            case R.id.action_search:
+                return true;
+            case R.id.action_settings:
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
 }

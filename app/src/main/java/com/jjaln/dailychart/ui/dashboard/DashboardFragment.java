@@ -36,14 +36,14 @@ public class DashboardFragment extends Fragment {
         View root = inflater.inflate(R.layout.fragment_dashboard, container, false);
 
 
-        button = root.findViewById(R.id.writeButton);
+        /*button = root.findViewById(R.id.writeButton);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent myIntent = new Intent(getActivity(), WriteBoard.class);
                 getActivity().startActivity(myIntent);
             }
-        });
+        });*/
 //        // database 오브젝트화
 //        FirebaseDatabase database = FirebaseDatabase.getInstance();
 //
@@ -80,7 +80,7 @@ public class DashboardFragment extends Fragment {
     public boolean onOptionsItemSelected(MenuItem item) {
 
         switch (item.getItemId()) {
-            case R.id.action_btn1:
+            case R.id.action_posting:
                 Intent myIntent = new Intent(getActivity(), WriteBoard.class);
                 getActivity().startActivity(myIntent);
                 return true;

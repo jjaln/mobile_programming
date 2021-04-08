@@ -5,9 +5,9 @@
     tools:context="gachon.mpclass.drawer_test.MainActivity">
 
     <item
-        android:id="@+id/action_posting"
-        android:title="@string/action_posting"
-        android:icon="@drawable/ic_post_add_white_24dp_x2"
+        android:id="@+id/action_message"
+        android:title="@string/action_message"
+        android:icon="@drawable/ic_notifications_white_24dp"
         android:orderInCategory="1"
         app:showAsAction="always" />
 

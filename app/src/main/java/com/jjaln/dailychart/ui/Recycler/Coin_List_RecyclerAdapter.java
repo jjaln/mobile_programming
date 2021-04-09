@@ -3,6 +3,7 @@ package com.jjaln.dailychart.ui.Recycler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -32,10 +33,19 @@ public class Coin_List_RecyclerAdapter extends RecyclerView.Adapter<Coin_List_Vi
 
     @Override
     public void onBindViewHolder(@NonNull Coin_List_ViewHolder holder, int position) {
-        Coin_List_Data data = CoinListDatas.get(position);
+        final Coin_List_Data data = CoinListDatas.get(position);
 
         holder.des.setText(data.getText());
         holder.icon.setImageResource(data.getImg());
+
+        holder.itemView.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view)
+            {
+                //Test onClick method
+                Toast.makeText(view.getContext(),data.getText(),Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     @Override

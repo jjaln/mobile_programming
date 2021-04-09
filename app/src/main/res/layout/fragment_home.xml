@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/bg"
     tools:context=".ui.home.HomeFragment">
 
     <LinearLayout
@@ -17,15 +18,15 @@
             android:layout_width="match_parent"
             android:layout_height="170dp"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="0dp"
+            android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
             android:layout_marginBottom="8dp"
-            android:background="#000000"
+            android:background="@drawable/round_rectangle"
             android:gravity="center"
             android:text="개인자산 보유항목"
             android:textAlignment="center"
-            android:textColor="#FFFFFF"
-            android:textSize="36sp"/>
+            android:textColor="#000000"
+            android:textSize="36sp" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/main_coin_list"
@@ -33,6 +34,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:scrollbars="none" />
+
     </LinearLayout>
 
 

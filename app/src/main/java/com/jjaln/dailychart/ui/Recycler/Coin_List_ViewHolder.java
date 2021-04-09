@@ -19,7 +19,6 @@ public class Coin_List_ViewHolder extends RecyclerView.ViewHolder
     public Coin_List_ViewHolder(View itemView)
     {
         super(itemView);
-
         icon = (ImageView)itemView.findViewById(R.id.coin_image);
         des = (TextView)itemView.findViewById(R.id.coin_name);
     }

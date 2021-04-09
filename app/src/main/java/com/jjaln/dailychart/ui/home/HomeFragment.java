@@ -37,7 +37,7 @@ public class HomeFragment extends Fragment {
                 new ViewModelProvider(this).get(HomeViewModel.class);
         View root = inflater.inflate(R.layout.fragment_home, container, false);
 
-        //RecyclerView Part
+        //Coin_List RecyclerView Part Start
         mRecyclerView = (RecyclerView)root.findViewById(R.id.main_coin_list);
         ArrayList<Coin_List_Data> data = new ArrayList<>();
 
@@ -55,6 +55,7 @@ public class HomeFragment extends Fragment {
         mAdapter = new Coin_List_RecyclerAdapter();
         mAdapter.setData(data);
         mRecyclerView.setAdapter(mAdapter);
+        //Coin_List RecyclerView End
 
         final TextView textView = root.findViewById(R.id.text_person_data);
         homeViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {

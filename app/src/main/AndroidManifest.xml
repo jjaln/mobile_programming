@@ -10,6 +10,8 @@
         android:supportsRtl="true"
         android:theme="@style/DailyChart">
         <activity android:name=".ui.Contents.News_list"></activity>
+        <activity android:name=".Setting"></activity>
+        <activity android:name=".Search"></activity>
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name">

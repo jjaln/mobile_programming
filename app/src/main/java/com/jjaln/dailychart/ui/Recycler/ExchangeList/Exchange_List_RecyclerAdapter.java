@@ -1,6 +1,7 @@
 package com.jjaln.dailychart.ui.Recycler.ExchangeList;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -42,9 +43,17 @@ public class Exchange_List_RecyclerAdapter extends RecyclerView.Adapter<Exchange
             {
                 //Test onClick method
                 //Toast.makeText(view.getContext(),data.getText(),Toast.LENGTH_SHORT).show();
-                Intent intent = view.getContext().getPackageManager().getLaunchIntentForPackage(data.getText());
-                view.getContext().startActivity(intent);
-
+                try {
+                    Intent intent = view.getContext().getPackageManager().getLaunchIntentForPackage(data.getText());
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    view.getContext().startActivity(intent);
+                }
+                catch (Exception e)
+                {
+                    String url = "market://details?id="+data.getText();
+                    Intent i = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+                    view.getContext().startActivity(i);
+                }
             }
         });
     }

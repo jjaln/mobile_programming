@@ -1,15 +1,16 @@
-package com.jjaln.dailychart.ui.Recycler;
+package com.jjaln.dailychart.ui.Recycler.ExchangeList;
 
-public class Coin_List_Data {
+public class Exchange_List_Data {
 
     private int img;
     private String text;
 
-    public Coin_List_Data(int img,String text)
+    public Exchange_List_Data(int img, String text)
     {
         this.img = img;
         this.text= text;
     }
+
 
     public String getText()
     {

@@ -46,8 +46,8 @@ public class HomeFragment extends Fragment {
         mRecyclerView = (RecyclerView)root.findViewById(R.id.home_exchange_list);
         ArrayList<Exchange_List_Data> ExchangeData = new ArrayList<>();
 
-        ExchangeData.add(new Exchange_List_Data(R.mipmap.bithumb,"com.btckorea.bithumb"));
-        ExchangeData.add(new Exchange_List_Data(R.mipmap.upbit,"com.dunamu.exchange"));
+        ExchangeData.add(new Exchange_List_Data(R.mipmap.bithumb,"com.btckorea.bithumb","Bithumb"));
+        ExchangeData.add(new Exchange_List_Data(R.mipmap.upbit,"com.dunamu.exchange","Upbit"));
 
         mLayoutManager = new LinearLayoutManager(getContext());
         mLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);

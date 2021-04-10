@@ -1,6 +1,7 @@
 package com.jjaln.dailychart;
 
 import android.os.Bundle;
+import android.preference.Preference;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -12,6 +13,7 @@ public class Setting extends AppCompatActivity {
         setContentView(R.layout.activity_setting);
         overridePendingTransition(R.anim.horizon_enter,R.anim.none);
         getSupportActionBar().setTitle("설정");
+
     }
 
     @Override

@@ -2,6 +2,23 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/bg">
+    android:background="@color/bg"
+    android:orientation="vertical">
 
+    <EditText
+        android:id="@+id/edit_search"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/round_board"
+        android:hint="(제목, 작성자, 내용)을 입력하세요"
+        android:layout_margin="10dp"
+        android:inputType="text"
+        android:textSize="20dp"
+        android:textColorHint="@color/white"
+        android:textColor="@color/white"/>
+    <ListView
+        android:id="@+id/search_listView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+    </ListView>
 </LinearLayout>

@@ -35,8 +35,8 @@ public class Post {
         result.put("password", password);
         result.put("title", title);
         result.put("body", body);
-        result.put("starCount", starCount);
-        result.put("stars", stars);
+        //result.put("starCount", starCount);
+        //result.put("stars", stars);
 
         return result;
     }

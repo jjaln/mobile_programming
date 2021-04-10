@@ -2,6 +2,7 @@ package com.jjaln.dailychart.ui.dashboard;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -95,11 +96,13 @@ public class DashboardFragment extends Fragment {
         mRecycler.setLayoutManager(mManager);
 
         // Set up FirebaseRecyclerAdapter with the Query
-        Query postsQuery = mDatabase;
+        Query postsQuery = mDatabase.child("posts");
 
         FirebaseRecyclerOptions options = new FirebaseRecyclerOptions.Builder<Post>()
                 .setQuery(postsQuery, Post.class)
                 .build();
+
+
 
         mAdapter = new FirebaseRecyclerAdapter<Post, PostViewHolder>(options) {
 
@@ -139,6 +142,7 @@ public class DashboardFragment extends Fragment {
 //                        onStarClicked(globalPostRef);
 //                    }
 //                });
+                viewHolder.bindToPost(model);
             }
         };
         mRecycler.setAdapter(mAdapter);

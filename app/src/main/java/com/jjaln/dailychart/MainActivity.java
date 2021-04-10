@@ -1,19 +1,14 @@
 package com.jjaln.dailychart;
 
-import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.Button;
-import android.view.View;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.database.*;
 
-import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
@@ -56,8 +51,12 @@ public class MainActivity extends AppCompatActivity {
 
         switch (item.getItemId()) {
             case R.id.action_settings: // 메뉴 아이콘 선택시 이벤트 설정
+                Intent settingIntent = new Intent(getApplicationContext(), Setting.class);
+                startActivity(settingIntent);
                 return true;
             case R.id.action_search: // 메뉴 아이콘 선택시 이벤트 설정
+                Intent searchIntent = new Intent(getApplicationContext(), Search.class);
+                startActivity(searchIntent);
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

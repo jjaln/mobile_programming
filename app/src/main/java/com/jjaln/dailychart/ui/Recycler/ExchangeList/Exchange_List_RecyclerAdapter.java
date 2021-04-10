@@ -44,13 +44,13 @@ public class Exchange_List_RecyclerAdapter extends RecyclerView.Adapter<Exchange
                 //Test onClick method
                 //Toast.makeText(view.getContext(),data.getText(),Toast.LENGTH_SHORT).show();
                 try {
-                    Intent intent = view.getContext().getPackageManager().getLaunchIntentForPackage(data.getText());
+                    Intent intent = view.getContext().getPackageManager().getLaunchIntentForPackage(data.getUri());
                     intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     view.getContext().startActivity(intent);
                 }
                 catch (Exception e)
                 {
-                    String url = "market://details?id="+data.getText();
+                    String url = "market://details?id="+data.getUri();
                     Intent i = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
                     view.getContext().startActivity(i);
                 }

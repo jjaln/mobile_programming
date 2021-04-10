@@ -3,19 +3,22 @@ package com.jjaln.dailychart.ui.Recycler.ExchangeList;
 public class Exchange_List_Data {
 
     private int img;
-    private String text;
+    private String uri;
+    private String name;
 
-    public Exchange_List_Data(int img, String text)
+    public Exchange_List_Data(int img, String uri, String name)
     {
         this.img = img;
-        this.text= text;
+        this.uri = uri;
+        this.name = name;
     }
 
 
-    public String getText()
+    public String getUri()
     {
-        return this.text;
+        return this.uri;
     }
+    public String getName() {return this.name;}
     public int getImg()
     {
         return this.img;

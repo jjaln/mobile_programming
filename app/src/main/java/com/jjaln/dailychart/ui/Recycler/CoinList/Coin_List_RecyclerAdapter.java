@@ -45,6 +45,7 @@ public class Coin_List_RecyclerAdapter extends RecyclerView.Adapter<Coin_List_Vi
             {
                 //Test onClick method
                 //Toast.makeText(view.getContext(),data.getText(),Toast.LENGTH_SHORT).show();
+
             }
         });
     }

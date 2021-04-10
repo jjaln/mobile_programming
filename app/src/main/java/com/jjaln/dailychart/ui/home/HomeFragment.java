@@ -15,8 +15,10 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.jjaln.dailychart.R;
-import com.jjaln.dailychart.ui.Recycler.Coin_List_Data;
-import com.jjaln.dailychart.ui.Recycler.Coin_List_RecyclerAdapter;
+import com.jjaln.dailychart.ui.Recycler.CoinList.Coin_List_Data;
+import com.jjaln.dailychart.ui.Recycler.CoinList.Coin_List_RecyclerAdapter;
+import com.jjaln.dailychart.ui.Recycler.ExchangeList.Exchange_List_Data;
+import com.jjaln.dailychart.ui.Recycler.ExchangeList.Exchange_List_RecyclerAdapter;
 
 import java.util.ArrayList;
 
@@ -26,7 +28,8 @@ public class HomeFragment extends Fragment {
 
     // RecyclerView by H
     private RecyclerView mRecyclerView;
-    private Coin_List_RecyclerAdapter mAdapter;
+    private Exchange_List_RecyclerAdapter mExchangeAdapter;
+    private Coin_List_RecyclerAdapter mCoinAdapter;
     private LinearLayoutManager mLayoutManager;
     private int Max_Coin_List = 5;
 
@@ -37,26 +40,41 @@ public class HomeFragment extends Fragment {
                 new ViewModelProvider(this).get(HomeViewModel.class);
         View root = inflater.inflate(R.layout.fragment_home, container, false);
 
-        //Coin_List RecyclerView Part Start
-        mRecyclerView = (RecyclerView)root.findViewById(R.id.main_coin_list);
-        ArrayList<Coin_List_Data> data = new ArrayList<>();
+        //Home_Exchange_List RecyclerView Part Start
+        mRecyclerView = (RecyclerView)root.findViewById(R.id.home_exchange_list);
+        ArrayList<Exchange_List_Data> ExchangeData = new ArrayList<>();
 
-        data.add(new Coin_List_Data(R.mipmap.btc,"BTC"));
-        data.add(new Coin_List_Data(R.mipmap.eth,"ETH"));
-        data.add(new Coin_List_Data(R.mipmap.xrp,"XRP"));
-        data.add(new Coin_List_Data(R.mipmap.ada,"ADA"));
-        data.add(new Coin_List_Data(R.mipmap.dot,"DOT"));
+        ExchangeData.add(new Exchange_List_Data(R.mipmap.bithumb,"com.btckorea.bithumb"));
+        ExchangeData.add(new Exchange_List_Data(R.mipmap.upbit,"com.dunamu.exchange"));
 
         mLayoutManager = new LinearLayoutManager(getContext());
         mLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
 
         mRecyclerView.setLayoutManager(mLayoutManager);
 
-        mAdapter = new Coin_List_RecyclerAdapter();
-        mAdapter.setData(data);
-        mRecyclerView.setAdapter(mAdapter);
-        //Coin_List RecyclerView End
+        mExchangeAdapter = new Exchange_List_RecyclerAdapter();
+        mExchangeAdapter.setData(ExchangeData);
+        mRecyclerView.setAdapter(mExchangeAdapter);
+        //Home_Exchange_List RecyclerView End
 
+        //Home_Coin_List RecyclerView Start
+        mRecyclerView = (RecyclerView)root.findViewById(R.id.home_coin_list);
+        ArrayList<Coin_List_Data> CoinData = new ArrayList<>();
+
+        CoinData.add(new Coin_List_Data(R.mipmap.btc,"BTC","1"));
+        CoinData.add(new Coin_List_Data(R.mipmap.eth,"ETH","2"));
+        CoinData.add(new Coin_List_Data(R.mipmap.xrp,"XRP","3"));
+        CoinData.add(new Coin_List_Data(R.mipmap.ada,"ADA","4"));
+        CoinData.add(new Coin_List_Data(R.mipmap.dot,"DOT","5"));
+
+        mLayoutManager = new LinearLayoutManager(getContext());
+        mLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+
+        mRecyclerView.setLayoutManager(mLayoutManager);
+        mCoinAdapter = new Coin_List_RecyclerAdapter();
+        mCoinAdapter.setData(CoinData);
+        mRecyclerView.setAdapter(mCoinAdapter);
+        //Home_Coin_List RecyclerView Part Start
         final TextView textView = root.findViewById(R.id.text_person_data);
         homeViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
             @Override

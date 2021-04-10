@@ -1,4 +1,4 @@
-package com.jjaln.dailychart.ui.Recycler;
+package com.jjaln.dailychart.ui.Recycler.CoinList;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,18 +14,18 @@ import java.util.ArrayList;
 
 public class Coin_List_RecyclerAdapter extends RecyclerView.Adapter<Coin_List_ViewHolder>
 {
-    private ArrayList<Coin_List_Data> CoinListDatas;
+    private ArrayList<Coin_List_Data> Coin_List;
 
     public void setData(ArrayList<Coin_List_Data> list)
     {
-        CoinListDatas = list;
+        Coin_List = list;
     }
 
     @NonNull
     @Override
     public Coin_List_ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.main_coin_item,parent,false);
+                .inflate(R.layout.home_coin_item,parent,false);
 
         Coin_List_ViewHolder holder = new Coin_List_ViewHolder(view);
         return holder;
@@ -33,10 +33,11 @@ public class Coin_List_RecyclerAdapter extends RecyclerView.Adapter<Coin_List_Vi
 
     @Override
     public void onBindViewHolder(@NonNull Coin_List_ViewHolder holder, int position) {
-        final Coin_List_Data data = CoinListDatas.get(position);
+        final Coin_List_Data data = Coin_List.get(position);
 
-        holder.des.setText(data.getText());
-        holder.icon.setImageResource(data.getImg());
+        holder.coin_img.setImageResource(data.getImg());
+        holder.coin_name.setText(data.getText());
+        holder.market_price.setText(data.getMarket_price());
 
         holder.itemView.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -50,6 +51,6 @@ public class Coin_List_RecyclerAdapter extends RecyclerView.Adapter<Coin_List_Vi
 
     @Override
     public int getItemCount() {
-        return CoinListDatas.size();
+        return Coin_List.size();
     }
 }

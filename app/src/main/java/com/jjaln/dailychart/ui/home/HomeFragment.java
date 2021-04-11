@@ -2,6 +2,7 @@ package com.jjaln.dailychart.ui.home;
 
 import android.nfc.cardemulation.OffHostApduService;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,18 +17,27 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 import com.jjaln.dailychart.R;
+import com.jjaln.dailychart.ui.Recycler.CoinList.Coin;
 import com.jjaln.dailychart.ui.Recycler.CoinList.Coin_List_Data;
 import com.jjaln.dailychart.ui.Recycler.CoinList.Coin_List_RecyclerAdapter;
 import com.jjaln.dailychart.ui.Recycler.ExchangeList.Exchange_List_Data;
 import com.jjaln.dailychart.ui.Recycler.ExchangeList.Exchange_List_RecyclerAdapter;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class HomeFragment extends Fragment {
 
     private HomeViewModel homeViewModel;
 
+    private DatabaseReference mDatabase;
     // RecyclerView by H
     private RecyclerView mRecyclerView;
     private Exchange_List_RecyclerAdapter mExchangeAdapter;
@@ -59,6 +69,7 @@ public class HomeFragment extends Fragment {
         mRecyclerView.setAdapter(mExchangeAdapter);
         //Home_Exchange_List RecyclerView End
 
+        mDatabase = FirebaseDatabase.getInstance().getReference();
 
         //Home_Coin_List RecyclerView Start
         mRecyclerView = (RecyclerView)root.findViewById(R.id.home_coin_list);
@@ -78,10 +89,13 @@ public class HomeFragment extends Fragment {
         mCoinAdapter.setData(CoinData);
         mRecyclerView.setAdapter(mCoinAdapter);
         //Home_Coin_List RecyclerView Part Start
+
+
         SwipeRefreshLayout refreshLayout = root.findViewById(R.id.home_coin_list_refresh);
         refreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
+
             refreshLayout.setRefreshing(false);
             }
         });

@@ -2,7 +2,7 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context="gachon.mpclass.drawer_test.MainActivity">
+    tools:context="gachon.mpclass.drawer_test.MaicolorPrimarynActivity">
 
     <item
         android:id="@+id/action_search"

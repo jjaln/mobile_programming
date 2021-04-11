@@ -1,27 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.jjaln.dailychart">
-    <uses-permission android:name="android.permission.INTERNET"/>
+
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/DailyChart"
-        >
-        <activity android:name=".ui.Contents.News_list"></activity>
-        <activity android:name=".Setting"></activity>
-        <activity android:name=".Search"></activity>
+        android:theme="@style/DailyChart">
+        <activity android:name=".ui.Contents.CoinInfo"
+            android:theme="@style/DailyChart.NoActionBar">
+        </activity>
+        <activity android:name=".ui.Contents.News_list" />
+        <activity android:name=".Setting" />
+        <activity android:name=".Search" />
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity android:name=".ui.dashboard.WriteBoard" />
     </application>
-
 </manifest>

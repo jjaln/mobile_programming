@@ -15,6 +15,7 @@ public class Coin_List_ViewHolder extends RecyclerView.ViewHolder
     public ImageView coin_img;
     public TextView coin_name;
     public TextView market_price;
+    public TextView fluctate;
 
     public Coin_List_ViewHolder(View itemView)
     {

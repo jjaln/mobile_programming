@@ -1,5 +1,6 @@
 package com.jjaln.dailychart.ui.Recycler.CoinList;
 
+import android.content.Intent;
 import android.service.autofill.Dataset;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -17,6 +18,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import com.jjaln.dailychart.R;
+import com.jjaln.dailychart.ui.Contents.CoinInfo;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
@@ -69,8 +71,11 @@ public class Coin_List_RecyclerAdapter extends RecyclerView.Adapter<Coin_List_Vi
             public void onClick(View view)
             {
                 //Test onClick method
-                Toast.makeText(view.getContext(),data.getText(),Toast.LENGTH_SHORT).show();
-
+                //Toast.makeText(view.getContext(),data.getText(),Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(view.getContext(), CoinInfo.class);
+                intent.putExtra("coin_name",data.getText());
+                intent.putExtra("coin_img",data.getImg());
+                view.getContext().startActivity(intent);
             }
         });
 

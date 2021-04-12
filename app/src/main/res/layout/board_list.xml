@@ -10,121 +10,131 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:layout_editor_absoluteX="-57dp"
-        tools:layout_editor_absoluteY="125dp">
+        tools:layout_editor_absoluteY="125dp" >
 
-        <TableLayout
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/board_list_recycler_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:stretchColumns="1"
-            android:layout_margin="20dp"
-            android:background="@drawable/round_board">
+            android:layout_margin="10dp"
+            android:background="@drawable/round_board"
+            tools:listitem="@layout/item_board" />
 
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" >
 
-                <ImageView
-                    android:id="@+id/imageView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="10dp"
-                    android:layout_gravity="center"
-                    app:srcCompat="@mipmap/btc" />
-
-                <TextView
-                    android:id="@+id/boardBTC"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:paddingVertical="10dp"
-                    android:text="비트코인"
-                    android:textSize="30sp" />
-
-            </TableRow>
-
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" >
-
-                <ImageView
-                    android:id="@+id/imageView2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="10dp"
-                    android:layout_gravity="center"
-                    app:srcCompat="@mipmap/eth" />
-
-                <TextView
-                    android:id="@+id/boardETH"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:paddingVertical="10dp"
-                    android:text="이더리움"
-                    android:textSize="30sp" />
-            </TableRow>
-
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-                <ImageView
-                    android:id="@+id/imageView3"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="10dp"
-                    android:layout_gravity="center"
-                    app:srcCompat="@mipmap/xrp" />
-
-                <TextView
-                    android:id="@+id/boardXRP"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:paddingVertical="10dp"
-                    android:text="리플"
-                    android:textSize="30sp" />
-            </TableRow>
-
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-                <ImageView
-                    android:id="@+id/imageView4"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="10dp"
-                    android:layout_gravity="center"
-                    app:srcCompat="@mipmap/ada" />
-
-                <TextView
-                    android:id="@+id/boardADA"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:paddingVertical="10dp"
-                    android:text="에이다"
-                    android:textSize="30sp" />
-            </TableRow>
-
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-                <ImageView
-                    android:id="@+id/imageView5"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="10dp"
-                    android:layout_gravity="center"
-                    app:srcCompat="@mipmap/dot" />
-
-                <TextView
-                    android:id="@+id/boardDOT"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:paddingVertical="10dp"
-                    android:text="폴카닷"
-                    android:textSize="30sp" />
-            </TableRow>
-
-        </TableLayout>
     </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <!--        <TableLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:stretchColumns="1"
+                android:layout_margin="20dp"
+                android:background="@drawable/round_board">
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" >
+
+                    <ImageView
+                        android:id="@+id/imageView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="10dp"
+                        android:layout_gravity="center"
+                        app:srcCompat="@mipmap/btc" />
+
+                    <TextView
+                        android:id="@+id/boardBTC"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingVertical="10dp"
+                        android:text="비트코인"
+                        android:textSize="30sp" />
+
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" >
+
+                    <ImageView
+                        android:id="@+id/imageView2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="10dp"
+                        android:layout_gravity="center"
+                        app:srcCompat="@mipmap/eth" />
+
+                    <TextView
+                        android:id="@+id/boardETH"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingVertical="10dp"
+                        android:text="이더리움"
+                        android:textSize="30sp" />
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <ImageView
+                        android:id="@+id/imageView3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="10dp"
+                        android:layout_gravity="center"
+                        app:srcCompat="@mipmap/xrp" />
+
+                    <TextView
+                        android:id="@+id/boardXRP"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingVertical="10dp"
+                        android:text="리플"
+                        android:textSize="30sp" />
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <ImageView
+                        android:id="@+id/imageView4"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="10dp"
+                        android:layout_gravity="center"
+                        app:srcCompat="@mipmap/ada" />
+
+                    <TextView
+                        android:id="@+id/boardADA"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingVertical="10dp"
+                        android:text="에이다"
+                        android:textSize="30sp" />
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <ImageView
+                        android:id="@+id/imageView5"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="10dp"
+                        android:layout_gravity="center"
+                        app:srcCompat="@mipmap/dot" />
+
+                    <TextView
+                        android:id="@+id/boardDOT"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingVertical="10dp"
+                        android:text="폴카닷"
+                        android:textSize="30sp" />
+                </TableRow>
+
+            </TableLayout> -->

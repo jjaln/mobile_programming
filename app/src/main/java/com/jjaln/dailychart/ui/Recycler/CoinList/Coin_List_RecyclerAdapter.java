@@ -1,12 +1,9 @@
 package com.jjaln.dailychart.ui.Recycler.CoinList;
 
 import android.content.Intent;
-import android.service.autofill.Dataset;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -20,9 +17,7 @@ import com.google.firebase.database.ValueEventListener;
 import com.jjaln.dailychart.R;
 import com.jjaln.dailychart.ui.Contents.CoinInfo;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.List;
 
 public class Coin_List_RecyclerAdapter extends RecyclerView.Adapter<Coin_List_ViewHolder>
 {
@@ -37,7 +32,7 @@ public class Coin_List_RecyclerAdapter extends RecyclerView.Adapter<Coin_List_Vi
     @Override
     public Coin_List_ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.home_coin_item,parent,false);
+                .inflate(R.layout.item_home_coinlist,parent,false);
 
         Coin_List_ViewHolder holder = new Coin_List_ViewHolder(view);
         return holder;
@@ -47,15 +42,17 @@ public class Coin_List_RecyclerAdapter extends RecyclerView.Adapter<Coin_List_Vi
         final Coin_List_Data data = Coin_List.get(position);
         mdatabase = FirebaseDatabase.getInstance().getReference("Bithumb/"+data.getText());
         DatabaseReference Coin = mdatabase;
+
         Coin.addValueEventListener(new ValueEventListener() {
             @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
+            public void onDataChange(@NonNull DataSnapshot snapshot){
+                String current_price ="";
                 for(DataSnapshot dataSnapshot :snapshot.getChildren())
                 {
                     Coin coin =dataSnapshot.getValue(Coin.class);
-                    String current_price = coin.getCurrent_price();
-                    holder.market_price.setText(current_price);
+                    current_price = coin.getCurrent_price();
                 }
+                holder.market_price.setText(current_price);
             }
 
             @Override

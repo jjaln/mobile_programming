@@ -14,7 +14,6 @@
         <activity android:name=".ui.Contents.CoinInfo"
             android:theme="@style/DailyChart.NoActionBar">
         </activity>
-        <activity android:name=".ui.Contents.News_list" />
         <activity android:name=".Setting" />
         <activity android:name=".Search" />
         <activity

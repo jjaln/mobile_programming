@@ -37,7 +37,6 @@ public class HomeFragment extends Fragment {
 
     private HomeViewModel homeViewModel;
 
-    private DatabaseReference mDatabase;
     // RecyclerView by H
     private RecyclerView mRecyclerView;
     private Exchange_List_RecyclerAdapter mExchangeAdapter;
@@ -69,7 +68,6 @@ public class HomeFragment extends Fragment {
         mRecyclerView.setAdapter(mExchangeAdapter);
         //Home_Exchange_List RecyclerView End
 
-        mDatabase = FirebaseDatabase.getInstance().getReference();
 
         //Home_Coin_List RecyclerView Start
         mRecyclerView = (RecyclerView)root.findViewById(R.id.home_coin_list);
@@ -90,12 +88,11 @@ public class HomeFragment extends Fragment {
         mRecyclerView.setAdapter(mCoinAdapter);
         //Home_Coin_List RecyclerView Part Start
 
-
+        //RefreshLayout
         SwipeRefreshLayout refreshLayout = root.findViewById(R.id.home_coin_list_refresh);
         refreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-
             refreshLayout.setRefreshing(false);
             }
         });

@@ -26,7 +26,7 @@ public class Exchange_List_RecyclerAdapter extends RecyclerView.Adapter<Exchange
     @Override
     public Exchange_List_ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.home_exchange_item,parent,false);
+                .inflate(R.layout.item_home_exchange,parent,false);
 
         Exchange_List_ViewHolder holder = new Exchange_List_ViewHolder(view);
         return holder;

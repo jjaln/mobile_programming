@@ -9,6 +9,8 @@ import android.widget.TextView;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.database.*;
+import com.jjaln.dailychart.ui.dashboard.BoardList;
+import com.jjaln.dailychart.ui.dashboard.DashboardFragment;
 import com.jjaln.dailychart.ui.wallet.Api_Client;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -23,9 +25,6 @@ import org.json.JSONObject;
 import java.util.HashMap;
 
 public class MainActivity extends AppCompatActivity {
-
-    FirebaseDatabase database = FirebaseDatabase.getInstance();
-    DatabaseReference myRef = database.getReference("message");
 
     @Override 
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,8 +45,9 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupWithNavController(navView, navController);
 
 
-
     }
+
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.

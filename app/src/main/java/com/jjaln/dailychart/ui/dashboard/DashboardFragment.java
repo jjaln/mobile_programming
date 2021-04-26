@@ -10,8 +10,11 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -35,12 +38,20 @@ public class DashboardFragment extends Fragment {
     private RecyclerView mRecycler;
     private LinearLayoutManager mManager;
 
+    public static String[] boardList = new String[] {"비트코인", "이더리움", "리플", "에이다", "폴카닷"};
+    private int boardNum = -1;
+
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         setHasOptionsMenu(true);
 
         super.onCreateView(inflater, container, savedInstanceState);
         View root = inflater.inflate(R.layout.fragment_dashboard, container, false);
+
+        Bundle bundle = this.getArguments();
+        if (bundle != null) {
+            boardNum = bundle.getInt("boardPosition");
+        }
 
         // [START create_database_reference]
         mDatabase = FirebaseDatabase.getInstance().getReference();
@@ -49,6 +60,18 @@ public class DashboardFragment extends Fragment {
         mRecycler = root.findViewById(R.id.messagesList);
         mRecycler.setHasFixedSize(true);
 
+        // This callback will only be called when MyFragment is at least Started.
+        OnBackPressedCallback callback = new OnBackPressedCallback(true /* enabled by default */) {
+            @Override
+            public void handleOnBackPressed() {
+                AppCompatActivity activity = (AppCompatActivity)getContext();
+                Fragment myFragment = new BoardList();
+                activity.getSupportFragmentManager().beginTransaction().replace(R.id.action_container, myFragment).addToBackStack(null).commit();
+            }
+        };
+        requireActivity().getOnBackPressedDispatcher().addCallback(getActivity(), callback);
+
+        // The callback can be enabled or disabled here or in handleOnBackPressed()
 //        // database 오브젝트화
 //        FirebaseDatabase database = FirebaseDatabase.getInstance();
 //
@@ -87,7 +110,7 @@ public class DashboardFragment extends Fragment {
         mRecycler.setLayoutManager(mManager);
 
         // Set up FirebaseRecyclerAdapter with the Query
-        Query postsQuery = mDatabase.child("posts");
+        Query postsQuery = mDatabase.child("posts/" + boardList[boardNum]);
 
         FirebaseRecyclerOptions options = new FirebaseRecyclerOptions.Builder<Post>()
                 .setQuery(postsQuery, Post.class)
@@ -166,6 +189,7 @@ public class DashboardFragment extends Fragment {
         switch (item.getItemId()) {
             case R.id.action_posting:
                 Intent myIntent = new Intent(getActivity(), WriteBoard.class);
+                myIntent.putExtra("boardPosition", boardNum);
                 getActivity().startActivity(myIntent);
                 return true;
             case R.id.action_search:
@@ -176,5 +200,6 @@ public class DashboardFragment extends Fragment {
                 return super.onOptionsItemSelected(item);
         }
     }
+
 
 }

@@ -1,5 +1,6 @@
 package com.jjaln.dailychart.ui.dashboard;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.widget.EditText;
@@ -19,6 +20,9 @@ public class WriteBoard extends AppCompatActivity {
     private DatabaseReference mDatabase;
     EditText ft, fb, id, pw;
     FloatingActionButton fab;
+    private String[] boardList = DashboardFragment.boardList;
+
+    private int boardNum;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -26,6 +30,9 @@ public class WriteBoard extends AppCompatActivity {
         setContentView(R.layout.write_board);
 
         mDatabase = FirebaseDatabase.getInstance().getReference();
+
+        Intent intent = getIntent();
+        boardNum = intent.getExtras().getInt("boardPosition");
 
         fab = findViewById(R.id.fabSubmitPost);
         fab.setOnClickListener((v -> { submitPost(); }));
@@ -78,7 +85,7 @@ public class WriteBoard extends AppCompatActivity {
         Map<String, Object> postValues = post.toMap();
 
         Map<String, Object> childUpdates = new HashMap<>();
-        childUpdates.put("/posts/" + key, postValues);
+        childUpdates.put("/posts/" + boardList[boardNum] + "/" + key, postValues);
 
         mDatabase.updateChildren(childUpdates);
     }

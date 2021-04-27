@@ -134,4 +134,41 @@ public class MainActivity extends AppCompatActivity {
             }
         }
     }
+
+    /*class NetworkThread2 extends Thread {
+
+        public void run() {
+
+
+            try {
+
+                String accessKey = ("bQkwgecfgKUUItt0ZK1enCugmtp5sBPjx8EF4AVM");
+                String secretKey = ("cV0QumxDAWVmJSw5UFpMnQOFQIpskGMisfXsQmSd");
+                String serverUrl = ("https://api.upbit.com");
+
+
+                Algorithm algorithm = Algorithm.HMAC256(secretKey);
+                String jwtToken = JWT.create()
+                        .withClaim("access_key", accessKey)
+                        .withClaim("nonce", UUID.randomUUID().toString())
+                        .sign(algorithm);
+
+                String authenticationToken = "Bearer " + jwtToken;
+                HttpClient client = HttpClientBuilder.create().build();
+                HttpGet request = new HttpGet(serverUrl + "/v1/accounts");
+                request.setHeader("Content-Type", "application/json");
+                request.addHeader("Authorization", authenticationToken);
+
+                HttpResponse response = client.execute(request);
+                HttpEntity entity = response.getEntity();
+
+
+                System.out.println(EntityUtils.toString(entity, "UTF-8"));
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
+    }*/
 }

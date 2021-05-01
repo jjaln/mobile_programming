@@ -18,6 +18,8 @@
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_marginRight="10dp"
+            android:gravity="center"
+            android:layout_centerVertical="true"
             />
 
         <TextView
@@ -30,27 +32,33 @@
             android:textSize="20sp"
             android:layout_centerVertical="true"
             />
-
+    <LinearLayout
+        android:id="@+id/price"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_toRightOf="@id/coin_name">
         <TextView
             android:id="@+id/market_price"
-            android:layout_toRightOf="@id/coin_name"
             android:layout_height="wrap_content"
             android:layout_width="80dp"
+            android:layout_marginRight="80dp"
             android:gravity="right"
             android:textSize="15sp" />
         <TextView
             android:id="@+id/fluctate_price"
-            android:layout_toRightOf="@id/coin_name"
             android:layout_below="@id/market_price"
             android:layout_height="wrap_content"
             android:layout_width="80dp"
             android:gravity="right"
             android:textSize="15sp" />
+    </LinearLayout>
         <TextView
             android:id="@+id/fluctate_rate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="20sp"
-            android:layout_toRightOf="@id/market_price"/>
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@id/price"/>
     </RelativeLayout>
 </LinearLayout>

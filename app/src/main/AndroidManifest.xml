@@ -11,20 +11,19 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/DailyChart">
-        <activity android:name=".ui.Contents.CoinInfo"
-            android:theme="@style/DailyChart.NoActionBar">
-        </activity>
-        <activity android:name=".Setting" />
-        <activity android:name=".Search" />
-        <activity
-            android:name=".MainActivity"
-            android:label="@string/app_name">
+        <activity android:name=".SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".MainActivity"/>
+        <activity
+            android:name=".ui.Contents.CoinInfo"
+            android:theme="@style/DailyChart.NoActionBar" />
+        <activity android:name=".Setting" />
+        <activity android:name=".Search" />
         <activity android:name=".ui.dashboard.WriteBoard" />
     </application>
+
 </manifest>

@@ -22,6 +22,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.google.gson.Gson;
 import com.jjaln.dailychart.MainActivity;
 import com.jjaln.dailychart.R;
+import com.jjaln.dailychart.SplashActivity;
 import com.jjaln.dailychart.ui.Recycler.CoinList.Coin;
 import com.jjaln.dailychart.ui.Recycler.CoinList.Coin_List_Data;
 import com.jjaln.dailychart.ui.Recycler.CoinList.Coin_List_RecyclerAdapter;
@@ -35,7 +36,7 @@ import java.util.ArrayList;
 public class HomeFragment extends Fragment {
 
     private HomeViewModel homeViewModel;
-
+    ArrayList<Coin> coins;
     // RecyclerView by H
     private RecyclerView mRecyclerView;
     private Exchange_List_RecyclerAdapter mExchangeAdapter;
@@ -45,6 +46,7 @@ public class HomeFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState)
     {
+        Log.d("############","Start");
         homeViewModel =
                 new ViewModelProvider(this).get(HomeViewModel.class);
         View root = inflater.inflate(R.layout.fragment_home, container, false);
@@ -71,17 +73,18 @@ public class HomeFragment extends Fragment {
         mRecyclerView = (RecyclerView)root.findViewById(R.id.home_coin_list);
         mRecyclerView.addItemDecoration(new DividerItemDecoration(getContext(),1));
         ArrayList<Coin_List_Data> CoinData = new ArrayList<>();
-//        ArrayList<Coin> getcoins = ((MainActivity)MainActivity.mainContext).coins;
-//        Log.d("BTC",getcoins.get(0).toString());
-        CoinData.add(new Coin_List_Data(R.mipmap.btc,"BTC","a","a",
-                "a"));
-        CoinData.add(new Coin_List_Data(R.mipmap.btc,"BTC","a","a",
-                "a"));
-        CoinData.add(new Coin_List_Data(R.mipmap.btc,"BTC","a","a",
-                "a"));
-        CoinData.add(new Coin_List_Data(R.mipmap.btc,"BTC","a","a",
-                "a"));
+        ArrayList<Coin> coins = SplashActivity.coins;
 
+        CoinData.add(new Coin_List_Data(R.mipmap.btc,"BTC",coins.get(0).closing_price.toString()
+                ,coins.get(0).fluctate_24H.toString(), coins.get(0).fluctate_rate_24H.toString()));
+        CoinData.add(new Coin_List_Data(R.mipmap.eth,"ETH",coins.get(1).closing_price.toString()
+                ,coins.get(1).fluctate_24H.toString(), coins.get(1).fluctate_rate_24H.toString()));
+        CoinData.add(new Coin_List_Data(R.mipmap.xrp,"XRP",coins.get(2).closing_price.toString()
+                ,coins.get(2).fluctate_24H.toString(), coins.get(2).fluctate_rate_24H.toString()));
+        CoinData.add(new Coin_List_Data(R.mipmap.ada,"ADA",coins.get(3).closing_price.toString()
+                ,coins.get(3).fluctate_24H.toString(), coins.get(3).fluctate_rate_24H.toString()));
+        CoinData.add(new Coin_List_Data(R.mipmap.dot,"DOT",coins.get(4).closing_price.toString()
+                ,coins.get(4).fluctate_24H.toString(), coins.get(4).fluctate_rate_24H.toString()));
 
         mLayoutManager = new LinearLayoutManager(getContext());
         mLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
@@ -110,11 +113,4 @@ public class HomeFragment extends Fragment {
         });
         return root;
     }
-
-    private void GetData()
-    {
-        Gson gson = new Gson();
-
-    }
-
 }

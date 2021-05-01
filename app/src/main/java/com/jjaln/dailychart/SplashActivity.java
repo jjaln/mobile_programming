@@ -1,87 +1,44 @@
 package com.jjaln.dailychart;
 
-import android.content.Context;
-import android.content.Intent;
-import android.os.Bundle;
-import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.widget.TextView;
-
-import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.jjaln.dailychart.ui.Recycler.CoinList.Coin;
-import com.jjaln.dailychart.ui.wallet.Api_Client;
-
 import androidx.appcompat.app.AppCompatActivity;
 
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
-import androidx.navigation.ui.AppBarConfiguration;
-import androidx.navigation.ui.NavigationUI;
+import android.content.Intent;
+import android.os.Bundle;
+import android.os.Handler;
+import android.widget.TextView;
+
+import com.jjaln.dailychart.ui.Recycler.CoinList.Coin;
+import com.jjaln.dailychart.ui.Recycler.NewsList.News_List_Data;
+import com.jjaln.dailychart.ui.wallet.Api_Client;
 
 import org.json.JSONObject;
+
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class MainActivity extends AppCompatActivity {
+public class SplashActivity extends AppCompatActivity {
     public static ArrayList<Coin> coins;
-    public static Context mainContext;
-    @Override 
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+    @Override
+    protected void onCreate(Bundle savedInstanceStare) {
+        super.onCreate(savedInstanceStare);
+        setContentView(R.layout.activity_splash);
         NetworkThread thread = new NetworkThread();
-        Log.d("//////////","Start");
         thread.start();
-        Log.d("//////////","END");
-        BottomNavigationView navView = findViewById(R.id.nav_view);
-        // Passing each menu ID as a set of Ids because each
-        // menu should be considered as top level destinations.
-        AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.navigation_home, R.id.navigation_dashboard, R.id.navigation_notifications)
-                .build();
-        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
-        NavigationUI.setupActionBarWithNavController(
-                this, navController, appBarConfiguration);
-        NavigationUI.setupWithNavController(navView, navController);
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        },3000);
     }
-
-
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.actionbar_actions, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-
-        switch (item.getItemId()) {
-            case R.id.action_settings: // 메뉴 아이콘 선택시 이벤트 설정
-                Intent settingIntent = new Intent(getApplicationContext(), Setting.class);
-                startActivity(settingIntent);
-                return true;
-            case R.id.action_search: // 메뉴 아이콘 선택시 이벤트 설정
-                Intent searchIntent = new Intent(getApplicationContext(), Search.class);
-                startActivity(searchIntent);
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
-        }
-    }
-    public void init()
-    {
-        coins.add(new Coin("0","0","0","0","0",
-                "0","0","0","0","0","0"));
-        coins.add(new Coin("0","0","0","0","0",
-                "0","0","0","0","0","0"));
-        coins.add(new Coin("0","0","0","0","0",
-                "0","0","0","0","0","0"));
-        coins.add(new Coin("0","0","0","0","0",
-                "0","0","0","0","0","0"));
-        coins.add(new Coin("0","0","0","0","0",
-                "0","0","0","0","0","0"));
+    protected void onPause() {
+        super.onPause();
+        finish();
     }
     class NetworkThread extends Thread {
         @Override
@@ -154,7 +111,7 @@ public class MainActivity extends AppCompatActivity {
                     String units_traded_24H = dt_list.getString("units_traded_24H");
 
                     coins.add(new Coin(acc_trade_value,acc_trade_value_24H,closing_price,fluctate_24H
-                    ,fluctate_rate_24H,max_price,min_price,opening_price,prev_closing_price,
+                            ,fluctate_rate_24H,max_price,min_price,opening_price,prev_closing_price,
                             units_traded,units_traded_24H));
                 }
 
@@ -166,41 +123,4 @@ public class MainActivity extends AppCompatActivity {
 //                e.printStackTrace();
             }
         }
-    }
-    /*class NetworkThread2 extends Thread {
-
-        public void run() {
-
-
-            try {
-
-                String accessKey = ("bQkwgecfgKUUItt0ZK1enCugmtp5sBPjx8EF4AVM");
-                String secretKey = ("cV0QumxDAWVmJSw5UFpMnQOFQIpskGMisfXsQmSd");
-                String serverUrl = ("https://api.upbit.com");
-
-                
-                Algorithm algorithm = Algorithm.HMAC256(secretKey);
-                String jwtToken = JWT.create()
-                        .withClaim("access_key", accessKey)
-                        .withClaim("nonce", UUID.randomUUID().toString())
-                        .sign(algorithm);
-
-                String authenticationToken = "Bearer " + jwtToken;
-                HttpClient client = HttpClientBuilder.create().build();
-                HttpGet request = new HttpGet(serverUrl + "/v1/accounts");
-                request.setHeader("Content-Type", "application/json");
-                request.addHeader("Authorization", authenticationToken);
-
-                HttpResponse response = client.execute(request);
-                HttpEntity entity = response.getEntity();
-
-
-                System.out.println(EntityUtils.toString(entity, "UTF-8"));
-
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-
-    }*/
-}
+}}

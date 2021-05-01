@@ -1,5 +1,8 @@
 package com.jjaln.dailychart.ui.Recycler.CoinList;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 public class Coin {
     public String key;
     public String acc_trade_value;
@@ -14,21 +17,20 @@ public class Coin {
     public String units_traded;
     public String units_traded_24H;
 
-    public Coin(){
+    public Coin() {
 
     }
 
-    public Coin(String acc_trade_value,String acc_trade_value_24H,
-                String closing_price,String fluctate_24H,String fluctate_rate_24H,
+    public Coin(String acc_trade_value, String acc_trade_value_24H,
+                String closing_price, String fluctate_24H, String fluctate_rate_24H,
                 String max_price, String min_price, String opening_price,
-                String prev_closing_price, String units_traded, String units_traded_24H)
-    {
+                String prev_closing_price, String units_traded, String units_traded_24H) {
         this.acc_trade_value = acc_trade_value;
-        this.acc_trade_value_24H =acc_trade_value_24H;
-        this.closing_price =closing_price;
+        this.acc_trade_value_24H = acc_trade_value_24H;
+        this.closing_price = closing_price;
         this.fluctate_24H = fluctate_24H;
         this.fluctate_rate_24H = fluctate_rate_24H;
-        this.max_price =max_price;
+        this.max_price = max_price;
         this.min_price = min_price;
         this.opening_price = opening_price;
         this.prev_closing_price = prev_closing_price;
@@ -43,6 +45,7 @@ public class Coin {
     public void setKey(String key) {
         this.key = key;
     }
+
     public String getAcc_trade_value() {
         return acc_trade_value;
     }

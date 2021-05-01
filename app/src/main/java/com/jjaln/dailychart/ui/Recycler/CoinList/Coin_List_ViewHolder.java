@@ -10,12 +10,14 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.jjaln.dailychart.R;
 
 
+
 public class Coin_List_ViewHolder extends RecyclerView.ViewHolder
 {
     public ImageView coin_img;
     public TextView coin_name;
     public TextView market_price;
-    public TextView fluctate;
+    public TextView fluctate_rate;
+    public TextView fluctate_price;
 
     public Coin_List_ViewHolder(View itemView)
     {
@@ -23,5 +25,7 @@ public class Coin_List_ViewHolder extends RecyclerView.ViewHolder
         coin_img = (ImageView)itemView.findViewById(R.id.coin_image);
         coin_name = (TextView)itemView.findViewById(R.id.coin_name);
         market_price = (TextView)itemView.findViewById(R.id.market_price);
+        fluctate_price = (TextView)itemView.findViewById(R.id.fluctate_price);
+        fluctate_rate = (TextView)itemView.findViewById(R.id.fluctate_rate);
     }
 }

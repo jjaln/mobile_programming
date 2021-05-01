@@ -81,8 +81,6 @@ public class CoinInfo extends AppCompatActivity {
             }
         });
 
-
-
         layoutManager = new LinearLayoutManager(this);
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
 

@@ -1,6 +1,5 @@
 package com.jjaln.dailychart.ui.home;
 
-import android.nfc.cardemulation.OffHostApduService;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -13,16 +12,15 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
-import com.google.firebase.database.ValueEventListener;
+
+import com.android.volley.toolbox.StringRequest;
+import com.google.gson.Gson;
+import com.jjaln.dailychart.MainActivity;
 import com.jjaln.dailychart.R;
 import com.jjaln.dailychart.ui.Recycler.CoinList.Coin;
 import com.jjaln.dailychart.ui.Recycler.CoinList.Coin_List_Data;
@@ -31,7 +29,8 @@ import com.jjaln.dailychart.ui.Recycler.ExchangeList.Exchange_List_Data;
 import com.jjaln.dailychart.ui.Recycler.ExchangeList.Exchange_List_RecyclerAdapter;
 
 import java.util.ArrayList;
-import java.util.List;
+
+
 
 public class HomeFragment extends Fragment {
 
@@ -42,7 +41,6 @@ public class HomeFragment extends Fragment {
     private Exchange_List_RecyclerAdapter mExchangeAdapter;
     private Coin_List_RecyclerAdapter mCoinAdapter;
     private LinearLayoutManager mLayoutManager;
-    private int Max_Coin_List = 5;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState)
@@ -71,13 +69,19 @@ public class HomeFragment extends Fragment {
 
         //Home_Coin_List RecyclerView Start
         mRecyclerView = (RecyclerView)root.findViewById(R.id.home_coin_list);
+        mRecyclerView.addItemDecoration(new DividerItemDecoration(getContext(),1));
         ArrayList<Coin_List_Data> CoinData = new ArrayList<>();
+//        ArrayList<Coin> getcoins = ((MainActivity)MainActivity.mainContext).coins;
+//        Log.d("BTC",getcoins.get(0).toString());
+        CoinData.add(new Coin_List_Data(R.mipmap.btc,"BTC","a","a",
+                "a"));
+        CoinData.add(new Coin_List_Data(R.mipmap.btc,"BTC","a","a",
+                "a"));
+        CoinData.add(new Coin_List_Data(R.mipmap.btc,"BTC","a","a",
+                "a"));
+        CoinData.add(new Coin_List_Data(R.mipmap.btc,"BTC","a","a",
+                "a"));
 
-        CoinData.add(new Coin_List_Data(R.mipmap.btc,"BTC","1"));
-        CoinData.add(new Coin_List_Data(R.mipmap.eth,"ETH","2"));
-        CoinData.add(new Coin_List_Data(R.mipmap.xrp,"XRP","3"));
-        CoinData.add(new Coin_List_Data(R.mipmap.ada,"ADA","4"));
-        CoinData.add(new Coin_List_Data(R.mipmap.dot,"DOT","5"));
 
         mLayoutManager = new LinearLayoutManager(getContext());
         mLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
@@ -105,6 +109,12 @@ public class HomeFragment extends Fragment {
             }
         });
         return root;
+    }
+
+    private void GetData()
+    {
+        Gson gson = new Gson();
+
     }
 
 }

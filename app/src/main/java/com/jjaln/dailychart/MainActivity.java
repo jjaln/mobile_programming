@@ -1,5 +1,6 @@
 package com.jjaln.dailychart;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -7,7 +8,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
 
-import com.auth0.android.jwt.JWT;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.database.*;
 import com.jjaln.dailychart.ui.Recycler.CoinList.Coin;
@@ -24,12 +24,6 @@ import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
-import org.apache.http.HttpEntity;
-import org.apache.http.HttpResponse;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.impl.client.HttpClientBuilder;
-import org.apache.http.util.EntityUtils;
 import org.json.JSONObject;
 
 import java.io.IOException;
@@ -38,7 +32,8 @@ import java.util.HashMap;
 import java.util.UUID;
 
 public class MainActivity extends AppCompatActivity {
-
+    public ArrayList<Coin> coins;
+    public static Context mainContext;
     @Override 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,7 +53,7 @@ public class MainActivity extends AppCompatActivity {
 
 
         thread.start();
-
+        mainContext = this;
 
     }
 
@@ -136,96 +131,30 @@ public class MainActivity extends AppCompatActivity {
                         (Float.parseFloat(xcoin_last_dot) * Float.parseFloat(total_dot));
                 final String str2 = "Bithumb : " + balance;
 
-                final String result2 = api.callApi("/public/ticker/BTC/KRW", rgParams);
-                JSONObject obj2 = new JSONObject(result2);
-                JSONObject data_list2 = obj2.getJSONObject("data");
+                String[] coin_list = {"BTC","ETH","XRP","ADA","DOT"};
+                for( String coin : coin_list)
+                {
+                    final String res = api.callApi("/public/ticker/"+coin+"/KRW", rgParams);
+                    JSONObject object = new JSONObject(res);
+                    JSONObject dt_list = object.getJSONObject("data");
+                    coins = new ArrayList<>();
 
-                String opening_price_btc = data_list2.getString("opening_price");
-                String closing_price_btc = data_list2.getString("closing_price");
-                String min_price_btc = data_list2.getString("min_price");
-                String max_price_btc = data_list2.getString("max_price");
-                String units_traded_btc = data_list2.getString("units_traded");
-                String acc_trade_value_btc = data_list2.getString("acc_trade_value");
-                String prev_closing_price_btc = data_list2.getString("prev_closing_price");
-                String units_traded_24H_btc = data_list2.getString("units_traded_24H");
-                String acc_trade_value_24H_btc = data_list2.getString("acc_trade_value_24H");
-                String fluctate_24H_btc = data_list2.getString("fluctate_24H");
-                String fluctate_rate_24H_btc = data_list2.getString("fluctate_rate_24H");
-                String date_btc = data_list2.getString("date");
+                    String acc_trade_value = dt_list.getString("acc_trade_value");
+                    String acc_trade_value_24H = dt_list.getString("acc_trade_value_24H");
+                    String closing_price = dt_list.getString("closing_price");
+                    String fluctate_24H = dt_list.getString("fluctate_24H");
+                    String fluctate_rate_24H = dt_list.getString("fluctate_rate_24H");
+                    String max_price = dt_list.getString("max_price");
+                    String min_price = dt_list.getString("min_price");
+                    String opening_price = dt_list.getString("opening_price");
+                    String prev_closing_price = dt_list.getString("prev_closing_price");
+                    String units_traded = dt_list.getString("units_traded");
+                    String units_traded_24H = dt_list.getString("units_traded_24H");
 
-                final String result3 = api.callApi("/public/ticker/ETH/KRW", rgParams);
-                JSONObject obj3 = new JSONObject(result3);
-                JSONObject data_list3 = obj3.getJSONObject("data");
-
-                String opening_price_eth = data_list3.getString("opening_price");
-                String closing_price_eth = data_list3.getString("closing_price");
-                String min_price_eth = data_list3.getString("min_price");
-                String max_price_eth = data_list3.getString("max_price");
-                String units_traded_eth = data_list3.getString("units_traded");
-                String acc_trade_value_eth = data_list3.getString("acc_trade_value");
-                String prev_closing_price_eth = data_list3.getString("prev_closing_price");
-                String units_traded_24H_eth = data_list3.getString("units_traded_24H");
-                String acc_trade_value_24H_eth = data_list3.getString("acc_trade_value_24H");
-                String fluctate_24H_eth = data_list3.getString("fluctate_24H");
-                String fluctate_rate_24H_eth = data_list3.getString("fluctate_rate_24H");
-                String date_eth = data_list3.getString("date");
-
-                final String result4 = api.callApi("/public/ticker/XRP/KRW", rgParams);
-                JSONObject obj4 = new JSONObject(result4);
-                JSONObject data_list4 = obj4.getJSONObject("data");
-
-                String opening_price_xrp = data_list4.getString("opening_price");
-                String closing_price_xrp = data_list4.getString("closing_price");
-                String min_price_xrp = data_list4.getString("min_price");
-                String max_price_xrp = data_list4.getString("max_price");
-                String units_traded_xrp = data_list4.getString("units_traded");
-                String acc_trade_value_xrp = data_list4.getString("acc_trade_value");
-                String prev_closing_price_xrp = data_list4.getString("prev_closing_price");
-                String units_traded_24H_xrp = data_list4.getString("units_traded_24H");
-                String acc_trade_value_24H_xrp = data_list4.getString("acc_trade_value_24H");
-                String fluctate_24H_xrp = data_list4.getString("fluctate_24H");
-                String fluctate_rate_24H_xrp = data_list4.getString("fluctate_rate_24H");
-                String date_xrp = data_list4.getString("date");
-
-                final String result5 = api.callApi("/public/ticker/ADA/KRW", rgParams);
-                JSONObject obj5 = new JSONObject(result2);
-                JSONObject data_list5 = obj5.getJSONObject("data");
-
-                String opening_price_ada = data_list5.getString("opening_price");
-                String closing_price_ada = data_list5.getString("closing_price");
-                String min_price_ada = data_list5.getString("min_price");
-                String max_price_ada = data_list5.getString("max_price");
-                String units_traded_ada = data_list5.getString("units_traded");
-                String acc_trade_value_ada = data_list5.getString("acc_trade_value");
-                String prev_closing_price_ada = data_list5.getString("prev_closing_price");
-                String units_traded_24H_ada = data_list5.getString("units_traded_24H");
-                String acc_trade_value_24H_ada = data_list5.getString("acc_trade_value_24H");
-                String fluctate_24H_ada = data_list5.getString("fluctate_24H");
-                String fluctate_rate_24H_ada = data_list5.getString("fluctate_rate_24H");
-                String date_ada = data_list5.getString("date");
-
-                final String result6 = api.callApi("/public/ticker/DOT/KRW", rgParams);
-                JSONObject obj6 = new JSONObject(result6);
-                JSONObject data_list6 = obj6.getJSONObject("data");
-
-                String opening_price_dot = data_list6.getString("opening_price");
-                String closing_price_dot = data_list6.getString("closing_price");
-                String min_price_dot = data_list6.getString("min_price");
-                String max_price_dot = data_list6.getString("max_price");
-                String units_traded_dot = data_list6.getString("units_traded");
-                String acc_trade_value_dot = data_list6.getString("acc_trade_value");
-                String prev_closing_price_dot = data_list6.getString("prev_closing_price");
-                String units_traded_24H_dot = data_list6.getString("units_traded_24H");
-                String acc_trade_value_24H_dot = data_list6.getString("acc_trade_value_24H");
-                String fluctate_24H_dot = data_list6.getString("fluctate_24H");
-                String fluctate_rate_24H_dot = data_list6.getString("fluctate_rate_24H");
-                String date_dot = data_list6.getString("date");
-
-
-
-
-
-
+                    coins.add(new Coin(acc_trade_value,acc_trade_value_24H,closing_price,fluctate_24H
+                    ,fluctate_rate_24H,max_price,min_price,opening_price,prev_closing_price,
+                            units_traded,units_traded_24H));
+                }
 
 
                 TextView text = (TextView)findViewById(R.id.text_person_data);

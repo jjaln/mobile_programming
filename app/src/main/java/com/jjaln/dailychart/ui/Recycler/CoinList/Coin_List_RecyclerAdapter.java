@@ -40,26 +40,6 @@ public class Coin_List_RecyclerAdapter extends RecyclerView.Adapter<Coin_List_Vi
     @Override
     public void onBindViewHolder(@NonNull Coin_List_ViewHolder holder, int position) {
         final Coin_List_Data data = Coin_List.get(position);
-        mdatabase = FirebaseDatabase.getInstance().getReference("Bithumb/"+data.getText());
-        DatabaseReference Coin = mdatabase;
-
-        Coin.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot){
-                String current_price ="";
-                for(DataSnapshot dataSnapshot :snapshot.getChildren())
-                {
-                    Coin coin =dataSnapshot.getValue(Coin.class);
-                    current_price = coin.getCurrent_price();
-                }
-                holder.market_price.setText(current_price);
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
 
         holder.coin_img.setImageResource(data.getImg());
         holder.coin_name.setText(data.getText());

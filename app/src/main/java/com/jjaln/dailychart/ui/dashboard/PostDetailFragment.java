@@ -3,6 +3,7 @@ package com.jjaln.dailychart.ui.dashboard;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -169,6 +170,22 @@ public class PostDetailFragment extends Fragment {
     }
 
     private void postComment() {
+        // Title is required
+        if (TextUtils.isEmpty(commentName.getText().toString())) {
+            commentName.setError("REQUIRED");
+            return;
+        }
+        // User name is required
+        if (TextUtils.isEmpty(commentPassword.getText().toString())) {
+            commentPassword.setError("REQUIRED");
+            return;
+        }
+        // Body is required
+        if (TextUtils.isEmpty(commentText.getText().toString())) {
+            commentText.setError("REQUIRED");
+            return;
+        }
+
         // Create new comment object
         Comment comment = new Comment(commentName.getText().toString(), commentPassword.getText().toString(), commentText.getText().toString());
 

@@ -13,6 +13,7 @@
         android:ellipsize="end"
         android:maxLines="1"
         android:textStyle="bold"
+        android:textColor="#FFFFFF"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:text="My First Post" />
@@ -26,6 +27,7 @@
         app:layout_constraintTop_toBottomOf="@+id/postTitle"
         android:maxLines="1"
         android:ellipsize="end"
+        android:textColor="#CCCCCC"
         tools:text="@string/sample_post_body" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

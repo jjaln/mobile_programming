@@ -26,11 +26,11 @@
         android:layout_marginTop="8dp"
         android:ellipsize="end"
         android:maxLines="1"
+        android:textSize="20sp"
+        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/postAuthorLayout"
-        tools:text="This is sample title 01234567890123456789"
-        tools:textSize="20sp"
-        tools:textStyle="bold"/>
+        tools:text="This is sample title 01234567890123456789" />
 
     <TextView
         android:id="@+id/postTextLayout"
@@ -40,6 +40,7 @@
         android:layout_marginLeft="8dp"
         android:layout_marginTop="16dp"
         android:paddingRight="10dp"
+        android:textColor="#CCCCCC"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/postTitleLayout"
         tools:text="This is sample text 01234567890123456789012345678901234567890123456789" />

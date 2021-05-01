@@ -2,7 +2,6 @@ package com.jjaln.dailychart.ui.dashboard;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -14,7 +13,6 @@ import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -25,8 +23,6 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.jjaln.dailychart.R;
 import com.jjaln.dailychart.ui.viewholder.PostViewHolder;
-
-import java.util.ArrayList;
 
 public class DashboardFragment extends Fragment {
 
@@ -70,8 +66,8 @@ public class DashboardFragment extends Fragment {
             }
         };
         requireActivity().getOnBackPressedDispatcher().addCallback(getActivity(), callback);
-
         // The callback can be enabled or disabled here or in handleOnBackPressed()
+
 //        // database 오브젝트화
 //        FirebaseDatabase database = FirebaseDatabase.getInstance();
 //
@@ -117,7 +113,6 @@ public class DashboardFragment extends Fragment {
                 .build();
 
 
-
         mAdapter = new FirebaseRecyclerAdapter<Post, PostViewHolder>(options) {
 
             @Override
@@ -134,7 +129,16 @@ public class DashboardFragment extends Fragment {
                 final String postKey = postRef.getKey();
                 viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
                     @Override
-                    public void onClick(View v) {
+                    public void onClick(View view) {
+                        Bundle arg = new Bundle();
+                        arg.putInt("boardPosition", boardNum);
+                        arg.putString(PostDetailFragment.EXTRA_POST_KEY, postKey);
+
+                        AppCompatActivity activity = (AppCompatActivity)view.getContext();
+                        Fragment myFragment = new PostDetailFragment();
+                        myFragment.setArguments(arg);
+                        activity.getSupportFragmentManager().beginTransaction().replace(R.id.action_container, myFragment).addToBackStack(null).commit();
+
 
                     }
                 });

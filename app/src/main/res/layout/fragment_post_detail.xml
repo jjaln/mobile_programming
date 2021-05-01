@@ -24,11 +24,14 @@
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginTop="8dp"
+        android:ellipsize="end"
+        android:maxLines="1"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/postAuthorLayout"
-        tools:text="This is sample title"
+        tools:text="This is sample title 01234567890123456789"
         tools:textSize="20sp"
         tools:textStyle="bold"/>
+
     <TextView
         android:id="@+id/postTextLayout"
         android:layout_width="wrap_content"
@@ -36,9 +39,10 @@
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginTop="16dp"
+        android:paddingRight="10dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/postTitleLayout"
-        tools:text="This is sample body" />
+        tools:text="This is sample text 01234567890123456789012345678901234567890123456789" />
     <EditText
         android:id="@+id/fieldCommentName"
         android:layout_width="0dp"
@@ -46,6 +50,7 @@
         android:layout_marginTop="16dp"
         android:hint="Name"
         android:maxLines="1"
+        android:maxLength="12"
         app:layout_constraintEnd_toStartOf="@+id/fieldCommentPassword"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintHorizontal_weight="8"
@@ -58,7 +63,9 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:hint="Password"
+        android:inputType="textPassword"
         android:maxLines="1"
+        android:maxLength="16"
         app:layout_constraintEnd_toStartOf="@+id/buttonPostComment"
         app:layout_constraintHorizontal_weight="8"
         app:layout_constraintTop_toBottomOf="@+id/postTextLayout" />
@@ -69,7 +76,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="0dp"
         android:hint="Write a comment..."
-        android:maxLines="1"
+        android:maxLines="5"
         app:layout_constraintEnd_toStartOf="@+id/buttonPostComment"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintHorizontal_weight="8"

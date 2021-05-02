@@ -55,9 +55,10 @@
     </LinearLayout>
         <TextView
             android:id="@+id/fluctate_rate"
-            android:layout_width="wrap_content"
+            android:layout_width="50dp"
             android:layout_height="wrap_content"
             android:textSize="20sp"
+            android:gravity="right"
             android:layout_centerVertical="true"
             android:layout_toRightOf="@id/price"/>
     </RelativeLayout>

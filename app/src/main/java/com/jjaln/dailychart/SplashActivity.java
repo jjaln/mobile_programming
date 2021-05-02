@@ -15,6 +15,7 @@ import org.json.JSONObject;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 
 public class SplashActivity extends AppCompatActivity {
@@ -110,9 +111,9 @@ public class SplashActivity extends AppCompatActivity {
                     String units_traded = dt_list.getString("units_traded");
                     String units_traded_24H = dt_list.getString("units_traded_24H");
 
-                    coins.add(new Coin(acc_trade_value,acc_trade_value_24H,closing_price,fluctate_24H
-                            ,fluctate_rate_24H,max_price,min_price,opening_price,prev_closing_price,
-                            units_traded,units_traded_24H));
+                    coins.add(new Coin(acc_trade_value, acc_trade_value_24H, closing_price, fluctate_24H
+                            , fluctate_rate_24H, max_price, min_price, opening_price, prev_closing_price,
+                            units_traded, units_traded_24H));
                 }
 
                 TextView text = (TextView)findViewById(R.id.text_person_data);

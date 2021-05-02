@@ -36,7 +36,6 @@ import java.util.ArrayList;
 public class HomeFragment extends Fragment {
 
     private HomeViewModel homeViewModel;
-    ArrayList<Coin> coins;
     // RecyclerView by H
     private RecyclerView mRecyclerView;
     private Exchange_List_RecyclerAdapter mExchangeAdapter;

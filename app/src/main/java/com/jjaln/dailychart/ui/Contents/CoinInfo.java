@@ -3,6 +3,7 @@ package com.jjaln.dailychart.ui.Contents;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -16,30 +17,24 @@ import android.widget.TextView;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.CollectionReference;
-import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
-import com.google.firestore.v1.Document;
 import com.jjaln.dailychart.R;
-import com.jjaln.dailychart.ui.Recycler.CoinList.Coin_List_RecyclerAdapter;
 import com.jjaln.dailychart.ui.Recycler.NewsList.News_List_Data;
 import com.jjaln.dailychart.ui.Recycler.NewsList.News_List_RecyclerAdapter;
 
 import java.util.ArrayList;
-import java.util.Dictionary;
 import java.util.Map;
 
 import com.jjaln.dailychart.ui.wallet.Api_Client;
 import com.jjoe64.graphview.GraphView;
-import com.jjoe64.graphview.series.DataPoint;
 import com.jjoe64.graphview.series.LineGraphSeries;
+import com.jjoe64.graphview.series.DataPoint;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -87,6 +82,7 @@ public class CoinInfo extends AppCompatActivity {
         FirebaseFirestore db = database.getInstance();
 
         mRecyclerView = (RecyclerView)findViewById(R.id.News_Recycler);
+        mRecyclerView.addItemDecoration(new DividerItemDecoration(getApplicationContext(), 1));
         newsListData = new ArrayList<>();
 
         CollectionReference Ref = db.collection(coin_name);
@@ -97,8 +93,8 @@ public class CoinInfo extends AppCompatActivity {
                     Map<String, Object> data = document.getData();
                     String title = data.get("title").toString();
                     String url = data.get("link").toString();
-                    Log.d("To_String","title : " +title + "  URL : "+url);
-                    newsListData.add(new News_List_Data(title, url));
+                    String desc = data.get("desc").toString();
+                    newsListData.add(new News_List_Data(title,desc, url));
                 }
                 mNewsAdapter.notifyDataSetChanged();
             }
@@ -111,6 +107,10 @@ public class CoinInfo extends AppCompatActivity {
         mNewsAdapter = new News_List_RecyclerAdapter();
         mNewsAdapter.setData(newsListData);
         mRecyclerView.setAdapter(mNewsAdapter);
+
+        NetworkThread thread = new NetworkThread();
+        thread.start();
+
     }
 
     public synchronized void drawLineGraph()throws Exception{
@@ -130,22 +130,8 @@ public class CoinInfo extends AppCompatActivity {
         graph.getViewport().setScrollableY(true);
 
     }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-
-        NetworkThread thread=new NetworkThread();
-
-        thread.start();
-
-
-    }
-
     public void addEntry(int x){
-
         series.appendData(new DataPoint(cnt++ ,x),true,10);
-
     }
 
     class NetworkThread extends Thread{
@@ -205,7 +191,7 @@ public class CoinInfo extends AppCompatActivity {
                         }
 
                     } catch (Exception e) {
-                        e.printStackTrace();
+//                        e.printStackTrace();
                     }
                 }
 

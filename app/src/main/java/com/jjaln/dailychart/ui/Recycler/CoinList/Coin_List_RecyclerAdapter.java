@@ -18,7 +18,9 @@ import com.google.firebase.database.ValueEventListener;
 
 import com.jjaln.dailychart.MainActivity;
 import com.jjaln.dailychart.R;
+import com.jjaln.dailychart.SplashActivity;
 import com.jjaln.dailychart.ui.Contents.CoinInfo;
+import com.jjaln.dailychart.ui.Recycler.NewsList.News_List_RecyclerAdapter;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
@@ -29,7 +31,8 @@ public class Coin_List_RecyclerAdapter extends RecyclerView.Adapter<Coin_List_Vi
     DecimalFormat dot1 = new DecimalFormat("###.#");
     DecimalFormat dot2 = new DecimalFormat("###.##");
     private ArrayList<Coin_List_Data> Coin_List;
-
+    private ArrayList<Coin> test;
+    private Coin update;
     public void setData(ArrayList<Coin_List_Data> list) {
         Coin_List = list;
     }
@@ -47,8 +50,8 @@ public class Coin_List_RecyclerAdapter extends RecyclerView.Adapter<Coin_List_Vi
     @Override
     public void onBindViewHolder(@NonNull Coin_List_ViewHolder holder, int position) {
         final Coin_List_Data data = Coin_List.get(position);
-        Coin update = MainActivity.coins.get(position);
-        Log.d("AAAAAAAAAAAAAAAAAAAAA", update.getClosing_price());
+        update = MainActivity.coins.get(position);
+
         holder.coin_img.setImageResource(data.getImg());
         holder.coin_name.setText(data.getText());
 
@@ -70,7 +73,6 @@ public class Coin_List_RecyclerAdapter extends RecyclerView.Adapter<Coin_List_Vi
                 holder.fluctate_price.setTextColor(Color.WHITE);
                 holder.fluctate_rate.setTextColor(Color.WHITE);
             }
-
         }
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -83,8 +85,6 @@ public class Coin_List_RecyclerAdapter extends RecyclerView.Adapter<Coin_List_Vi
                 view.getContext().startActivity(intent);
             }
         });
-
-
     }
 
     @Override
@@ -95,7 +95,7 @@ public class Coin_List_RecyclerAdapter extends RecyclerView.Adapter<Coin_List_Vi
     public String getFormat(String price) {
         String pm = "";
         if (price.charAt(0) == '-') {
-            pm = "-";
+            pm = "- ";
             price = price.substring(1);
         }
 

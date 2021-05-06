@@ -1,6 +1,5 @@
 package com.jjaln.dailychart;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -11,36 +10,23 @@ import android.widget.TextView;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.jjaln.dailychart.ui.Recycler.CoinList.Coin;
-import com.jjaln.dailychart.ui.Recycler.CoinList.Coin_List_Data;
-import com.jjaln.dailychart.ui.Recycler.CoinList.Coin_List_RecyclerAdapter;
-import com.jjaln.dailychart.ui.Recycler.ExchangeList.Exchange_List_RecyclerAdapter;
-import com.jjaln.dailychart.ui.home.HomeFragment;
 import com.jjaln.dailychart.ui.wallet.Api_Client;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
-import androidx.recyclerview.widget.DividerItemDecoration;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 
 public class MainActivity extends AppCompatActivity {
     public static ArrayList<Coin> coins = SplashActivity.coins;
     public static ArrayList<Coin> prev;
-    private RecyclerView mRecyclerView;
-    private Exchange_List_RecyclerAdapter mExchangeAdapter;
-    private Coin_List_RecyclerAdapter mCoinAdapter;
-    private LinearLayoutManager mLayoutManager;
     Handler handler = null;
 
     @Override
@@ -50,6 +36,7 @@ public class MainActivity extends AppCompatActivity {
         NetworkThread thread = new NetworkThread();
         Log.d("//////////", "Start");
         Log.d("//////////", "END");
+        prev = coins;
         BottomNavigationView navView = findViewById(R.id.nav_view);
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
@@ -141,29 +128,26 @@ public class MainActivity extends AppCompatActivity {
                     final String str2 = "Bithumb : " + balance;
 
                     String[] coin_list = {"BTC", "ETH", "XRP", "ADA", "DOT"};
-//                    coins = new ArrayList<>();
+                    coins = new ArrayList<>();
                     for (String coin : coin_list) {
                         final String res = api.callApi("/public/ticker/" + coin + "/KRW", rgParams);
                         JSONObject object = new JSONObject(res);
                         JSONObject dt_list = object.getJSONObject("data");
 
-                        String acc_trade_value = dt_list.getString("acc_trade_value");
-                        String acc_trade_value_24H = dt_list.getString("acc_trade_value_24H");
+//                        String acc_trade_value = dt_list.getString("acc_trade_value");
+//                        String acc_trade_value_24H = dt_list.getString("acc_trade_value_24H");
+//                        String max_price = dt_list.getString("max_price");
+//                        String min_price = dt_list.getString("min_price");
+//                        String opening_price = dt_list.getString("opening_price");
+//                        String prev_closing_price = dt_list.getString("prev_closing_price");
+//                        String units_traded = dt_list.getString("units_traded");
+//                        String units_traded_24H = dt_list.getString("units_traded_24H");
+
                         String closing_price = dt_list.getString("closing_price");
                         String fluctate_24H = dt_list.getString("fluctate_24H");
                         String fluctate_rate_24H = dt_list.getString("fluctate_rate_24H");
-                        String max_price = dt_list.getString("max_price");
-                        String min_price = dt_list.getString("min_price");
-                        String opening_price = dt_list.getString("opening_price");
-                        String prev_closing_price = dt_list.getString("prev_closing_price");
-                        String units_traded = dt_list.getString("units_traded");
-                        String units_traded_24H = dt_list.getString("units_traded_24H");
 
-
-                        coins.get(Arrays.asList(coin_list).indexOf(coin)).update(acc_trade_value,acc_trade_value_24H,
-                                closing_price,fluctate_24H,fluctate_rate_24H,max_price,min_price,opening_price,
-                                prev_closing_price,units_traded,units_traded_24H);
-                        Log.d(Arrays.asList(coin_list).indexOf(coin)+"aaaaaaaaaa",coins.get(Arrays.asList(coin_list).indexOf(coin)).getClosing_price());
+                        coins.add(new Coin(closing_price,fluctate_24H,fluctate_rate_24H));
                     }
 
                     TextView text = (TextView) findViewById(R.id.text_person_data);
@@ -172,11 +156,12 @@ public class MainActivity extends AppCompatActivity {
 //                e.printStackTrace();
                 }
                 try {
-                    Thread.sleep(500);
+                    Thread.sleep(1000);
                 } catch (InterruptedException e) {
-                    e.printStackTrace();
+//                    e.printStackTrace();
                 }
 //            handler.post(this::run);
+
             }
         }
     }

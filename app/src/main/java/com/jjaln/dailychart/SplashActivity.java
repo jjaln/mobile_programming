@@ -119,9 +119,8 @@ public class SplashActivity extends AppCompatActivity {
                 TextView text = (TextView)findViewById(R.id.text_person_data);
                 text.setText(str2);
 
-
             } catch (Exception e) {
-//                e.printStackTrace();
+                e.printStackTrace();
             }
         }
 }}

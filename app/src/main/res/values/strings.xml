@@ -9,4 +9,6 @@
     <string name="action_posting">Posting</string>
     <string name="action_message">Message</string>
     <string name="sample_post_body">Max line is 1. If the post over this line, look like this -> 1231231231231231321313213213123</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

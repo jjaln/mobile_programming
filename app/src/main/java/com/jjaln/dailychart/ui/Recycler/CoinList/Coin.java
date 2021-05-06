@@ -21,6 +21,12 @@ public class Coin {
 
     }
 
+    public Coin(String closing_price, String fluctate_24H, String fluctate_rate_24H) {
+        this.closing_price = closing_price;
+        this.fluctate_24H = fluctate_24H;
+        this.fluctate_rate_24H = fluctate_rate_24H;
+    }
+
     public Coin(String acc_trade_value, String acc_trade_value_24H,
                 String closing_price, String fluctate_24H, String fluctate_rate_24H,
                 String max_price, String min_price, String opening_price,
@@ -38,23 +44,12 @@ public class Coin {
         this.units_traded_24H = units_traded_24H;
     }
 
-    public void update(String acc_trade_value, String acc_trade_value_24H,
-                       String closing_price, String fluctate_24H, String fluctate_rate_24H,
-                       String max_price, String min_price, String opening_price,
-                       String prev_closing_price, String units_traded, String units_traded_24H)
-    {
-        this.acc_trade_value = acc_trade_value;
-        this.acc_trade_value_24H = acc_trade_value_24H;
+    public void update(String closing_price, String fluctate_24H, String fluctate_rate_24H) {
         this.closing_price = closing_price;
         this.fluctate_24H = fluctate_24H;
         this.fluctate_rate_24H = fluctate_rate_24H;
-        this.max_price = max_price;
-        this.min_price = min_price;
-        this.opening_price = opening_price;
-        this.prev_closing_price = prev_closing_price;
-        this.units_traded = units_traded;
-        this.units_traded_24H = units_traded_24H;
     }
+
     public String getKey() {
         return key;
     }

@@ -48,6 +48,7 @@ dependencies {
     implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0'
     implementation files('libs/commons-codec-1.10.jar')
     implementation files('libs/jackson-all-1.9.11.jar')
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     testImplementation 'junit:junit:4.+'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
@@ -58,5 +59,6 @@ dependencies {
 
     implementation 'com.android.volley:volley:1.1.1'
     implementation 'com.google.code.gson:gson:2.8.6'
+
     implementation 'com.jjoe64:graphview:4.2.1'
 }

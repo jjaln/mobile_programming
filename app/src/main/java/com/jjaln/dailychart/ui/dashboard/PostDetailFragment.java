@@ -5,11 +5,16 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.PopupWindow;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -34,6 +39,8 @@ import org.w3c.dom.Text;
 import java.util.ArrayList;
 import java.util.List;
 
+import static android.content.Context.LAYOUT_INFLATER_SERVICE;
+
 public class PostDetailFragment extends Fragment {
     private String[] boardList = DashboardFragment.boardList;
     private int boardNum;
@@ -50,12 +57,14 @@ public class PostDetailFragment extends Fragment {
     private RecyclerView mRecycler;
 
     private TextView author, title, body;
+    private String postPassword;
     private Button postBtn;
 
     private EditText commentText;
     private EditText commentName;
     private EditText commentPassword;
 
+    private ImageView deletePost;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -68,7 +77,6 @@ public class PostDetailFragment extends Fragment {
             boardNum = bundle.getInt("boardPosition");
         }
 
-        // This callback will only be called when MyFragment is at least Started.
         OnBackPressedCallback callback = new OnBackPressedCallback(true /* enabled by default */) {
             @Override
             public void handleOnBackPressed() {
@@ -81,7 +89,6 @@ public class PostDetailFragment extends Fragment {
             }
         };
         requireActivity().getOnBackPressedDispatcher().addCallback(getActivity(), callback);
-        // The callback can be enabled or disabled here or in handleOnBackPressed()
 
         mRecycler = root.findViewById(R.id.recyclerPostComments);
 
@@ -93,6 +100,8 @@ public class PostDetailFragment extends Fragment {
         commentText = (EditText)root.findViewById(R.id.fieldCommentText);
         commentName = (EditText)root.findViewById(R.id.fieldCommentName);
         commentPassword = (EditText)root.findViewById(R.id.fieldCommentPassword);
+
+        deletePost = (ImageView)root.findViewById(R.id.delete_post);
 
         return root;
     }
@@ -120,6 +129,52 @@ public class PostDetailFragment extends Fragment {
                 postComment();
             }
         });
+
+        deletePost.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // inflate the layout of the popup window
+                LayoutInflater inflater = (LayoutInflater)v.getContext().getSystemService(LAYOUT_INFLATER_SERVICE);
+                View popupView = inflater.inflate(R.layout.popup_delete, null);
+
+                // create the popup window
+                int width = LinearLayout.LayoutParams.MATCH_PARENT;
+                int height = LinearLayout.LayoutParams.MATCH_PARENT;
+                boolean focusable = true; // lets taps outside the popup also dismiss it
+                final PopupWindow popupWindow = new PopupWindow(popupView, width, height, focusable);
+                popupWindow.setAnimationStyle(R.style.Popup);
+                // show the popup window
+                // which view you pass in doesn't matter, it is only used for the window tolken
+                popupWindow.showAtLocation(view, Gravity.CENTER, 0, 0);
+
+                TextView cancel = (TextView)popupView.findViewById(R.id.delete_cancel);
+                cancel.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        popupWindow.dismiss();
+                    }
+                });
+                TextView confirm = (TextView)popupView.findViewById(R.id.delete_confirm);
+                confirm.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        EditText pw = (EditText)popupView.findViewById(R.id.delete_password);
+                        if (postPassword.equals(pw.getText().toString())) {
+                            mPostReference.removeValue();
+                            popupWindow.dismiss();
+
+                            Toast.makeText(getContext(), "게시글이 삭제되었습니다.", Toast.LENGTH_SHORT).show();
+
+                        }
+                        else {
+                            Toast.makeText(getContext(), "비밀번호가 일치하지 않습니다.", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
+            }
+        });
+
+
         mRecycler.setLayoutManager(new LinearLayoutManager(getContext()));
     }
 
@@ -133,9 +188,20 @@ public class PostDetailFragment extends Fragment {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 // Get Post object and use the values to update the UI
                 Post post = dataSnapshot.getValue(Post.class);
-                author.setText(post.author);
-                title.setText(post.title);
-                body.setText(post.body);
+
+                try {
+                    author.setText(post.author);
+                    title.setText(post.title);
+                    body.setText(post.body);
+                    postPassword = post.password;
+                } catch (NullPointerException e) {
+                    Bundle arg = new Bundle();
+                    arg.putInt("boardPosition", boardNum);
+                    AppCompatActivity activity = (AppCompatActivity)getContext();
+                    Fragment myFragment = new DashboardFragment();
+                    myFragment.setArguments(arg);
+                    activity.getSupportFragmentManager().beginTransaction().replace(R.id.action_container, myFragment).addToBackStack(null).commit();
+                }
             }
 
             @Override

@@ -161,6 +161,7 @@ public class PostDetailFragment extends Fragment {
                         EditText pw = (EditText)popupView.findViewById(R.id.delete_password);
                         if (postPassword.equals(pw.getText().toString())) {
                             mPostReference.removeValue();
+                            mCommentsReference.removeValue();
                             popupWindow.dismiss();
 
                             Toast.makeText(getContext(), "게시글이 삭제되었습니다.", Toast.LENGTH_SHORT).show();
@@ -351,6 +352,7 @@ public class PostDetailFragment extends Fragment {
                             Toast.LENGTH_SHORT).show();
                 }
             };
+
             ref.addChildEventListener(childEventListener);
 
             // Store reference to listener so it can be removed on app stop
@@ -361,6 +363,8 @@ public class PostDetailFragment extends Fragment {
         public CommentViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
             LayoutInflater inflater = LayoutInflater.from(mContext);
             View view = inflater.inflate(R.layout.item_comment, parent, false);
+
+
             return new CommentViewHolder(view);
         }
 
@@ -369,6 +373,54 @@ public class PostDetailFragment extends Fragment {
             Comment comment = mComments.get(position);
             holder.authorView.setText(comment.author);
             holder.bodyView.setText(comment.text);
+
+            String commentPW = comment.password;
+            holder.deleteView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Toast.makeText(v.getContext(), mCommentIds.get(position), Toast.LENGTH_SHORT).show();
+
+                    // inflate the layout of the popup window
+                    LayoutInflater inflater = (LayoutInflater)v.getContext().getSystemService(LAYOUT_INFLATER_SERVICE);
+                    View popupView = inflater.inflate(R.layout.popup_delete, null);
+
+                    // create the popup window
+                    int width = LinearLayout.LayoutParams.MATCH_PARENT;
+                    int height = LinearLayout.LayoutParams.MATCH_PARENT;
+                    boolean focusable = true; // lets taps outside the popup also dismiss it
+                    final PopupWindow popupWindow = new PopupWindow(popupView, width, height, focusable);
+                    popupWindow.setAnimationStyle(R.style.Popup);
+                    // show the popup window
+                    // which view you pass in doesn't matter, it is only used for the window tolken
+                    popupWindow.showAtLocation(v, Gravity.CENTER, 0, 0);
+
+                    TextView cancel = (TextView)popupView.findViewById(R.id.delete_cancel);
+                    cancel.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            popupWindow.dismiss();
+                        }
+                    });
+                    TextView confirm = (TextView)popupView.findViewById(R.id.delete_confirm);
+                    confirm.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            EditText pw = (EditText)popupView.findViewById(R.id.delete_password);
+                            if (commentPW.equals(pw.getText().toString())) {
+                                mDatabaseReference.child(mCommentIds.get(position)).removeValue();
+                                popupWindow.dismiss();
+
+                                Toast.makeText(v.getContext(), "댓글이 삭제되었습니다.", Toast.LENGTH_SHORT).show();
+
+                            }
+                            else {
+                                Toast.makeText(v.getContext(), "비밀번호가 일치하지 않습니다.", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    });
+                }
+            });
+
         }
 
         @Override

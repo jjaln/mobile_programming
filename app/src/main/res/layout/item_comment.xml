@@ -30,6 +30,16 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:text="John Doe" />
 
+
+    <ImageView
+        android:id="@+id/commentDelete"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_centerVertical="true"
+        android:src="@android:drawable/ic_menu_close_clear_cancel"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <TextView
         android:id="@+id/commentBody"
         style="@style/TextAppearance.AppCompat.Small"
